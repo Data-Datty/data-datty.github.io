@@ -15,42 +15,79 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        /* Simple Header */
-        .header {
+        .card {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            border-radius: 15px;
-            padding: 20px 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
             color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .launch-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 25px;
+        }
+
+        .launch-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+            text-decoration: none;
+            color: white;
         }
 
         .back-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: #b91c1c;
             text-decoration: none;
             font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
             transition: all 0.3s ease;
         }
 
@@ -60,172 +97,56 @@
             color: #7f1d1d;
         }
 
-        /* App Container */
-        .app-container {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        .note {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin-top: 20px;
+            font-style: italic;
         }
 
-        .app-frame {
-            width: 100%;
-            height: 850px;
-            border: none;
-            border-radius: 10px;
-            background: white;
-            display: none; /* Hidden by default due to embedding issues */
-        }
-
-        .fallback-content {
-            padding: 40px 20px;
-        }
-
-        .fallback-content h2 {
-            font-size: 1.5rem;
-            color: #1f2937;
-            margin-bottom: 15px;
-        }
-
-        .fallback-content p {
-            font-size: 1.1rem;
-            color: #6b7280;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .launch-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .launch-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
-            text-decoration: none;
-            color: white;
-        }
-
-        .try-embed-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(185, 28, 28, 0.1);
-            color: #b91c1c;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-left: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .try-embed-button:hover {
-            background: rgba(185, 28, 28, 0.15);
-            text-decoration: none;
-            color: #7f1d1d;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 20px 15px;
             }
-
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+            
+            .card {
+                padding: 30px 25px;
             }
-
-            .app-frame {
-                height: 700px;
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .description {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Simple Header -->
-        <header class="header">
+        <div class="card">
+            <div class="icon">🌱</div>
             <h1>Garden Nerd Chatbot</h1>
-            <a href="index.html" class="back-link">
-                <span>←</span>
-                <span>Back to Datty</span>
+            <p class="description">
+                Your AI-powered gardening assistant is ready to help with plant care, 
+                identification, troubleshooting, and personalized garden advice.
+            </p>
+            
+            <a href="https://garden-nerd-chatbot.streamlit.app/" target="_blank" class="launch-button">
+                <span>🚀</span>
+                <span>Launch Chatbot</span>
             </a>
-        </header>
-
-        <!-- App Container -->
-        <div class="app-container">
-            <!-- Fallback content when iframe doesn't work -->
-            <div class="fallback-content" id="fallbackContent">
-                <h2>🌱 Garden Nerd Chatbot</h2>
-                <p>
-                    Your AI-powered gardening assistant is ready to help with plant care, identification, 
-                    troubleshooting, and personalized garden advice.
-                </p>
-                <a href="https://garden-nerd-chatbot.streamlit.app/" target="_blank" class="launch-button">
-                    <span>🚀</span>
-                    <span>Launch Garden Nerd Chatbot</span>
-                </a>
-                <a href="#" onclick="tryEmbed(); return false;" class="try-embed-button">
-                    <span>🔄</span>
-                    <span>Try Embedding</span>
+            
+            <div>
+                <a href="index.html" class="back-link">
+                    <span>←</span>
+                    <span>Back to Datty</span>
                 </a>
             </div>
-
-            <!-- Hidden iframe - will show if embedding works -->
-            <iframe 
-                id="chatbotFrame"
-                src="https://garden-nerd-chatbot.streamlit.app/" 
-                class="app-frame"
-                title="Garden Nerd Chatbot"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-top-navigation">
-            </iframe>
+            
+            <p class="note">Opens in a new tab for the best experience</p>
         </div>
     </div>
-
-    <script>
-        function tryEmbed() {
-            const fallback = document.getElementById('fallbackContent');
-            const iframe = document.getElementById('chatbotFrame');
-            
-            // Hide fallback and show iframe
-            fallback.style.display = 'none';
-            iframe.style.display = 'block';
-            
-            // Set a timeout to show fallback again if iframe fails to load
-            setTimeout(() => {
-                // Check if iframe is still having issues
-                iframe.addEventListener('error', () => {
-                    fallback.style.display = 'block';
-                    iframe.style.display = 'none';
-                });
-            }, 5000);
-        }
-
-        // Try to detect if the app loads successfully
-        document.addEventListener('DOMContentLoaded', function() {
-            const iframe = document.getElementById('chatbotFrame');
-            
-            // Automatically try embedding after a short delay
-            setTimeout(() => {
-                tryEmbed();
-            }, 2000);
-        });
-    </script>
 </body>
 </html>
