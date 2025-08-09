@@ -264,6 +264,23 @@
             margin: 0 auto;
         }
 
+        /* Logo Banner */
+        .logo-banner {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo-banner img {
+            max-height: 120px;
+            width: auto;
+            filter: drop-shadow(0 4px 12px rgba(185, 28, 28, 0.2));
+        }
+
         /* Enhanced Header */
         .header {
             display: flex;
@@ -836,6 +853,11 @@
         <!-- Enhanced Main Content -->
         <main class="main-content" id="mainContent">
             <div class="content-container">
+                <!-- Logo Banner -->
+                <div class="logo-banner">
+                    <img src="datty-logo.png" alt="Datty - Data Analysis" />
+                </div>
+
                 <!-- Enhanced Header -->
                 <header class="header">
                     <div class="header-left">
@@ -891,19 +913,19 @@
                             </div>
                         </a>
 
-                        <div class="project-card coming-soon-card" data-category="economic" data-status="coming-soon" data-name="GDP Growth Tracker" data-date="2025-03">
+                        <a href="business-pulse.html" class="project-card" data-category="economic" data-status="available" data-name="The Business Pulse" data-date="2025-02">
                             <div class="project-preview economic">
-                                <div class="project-icon">🏛️</div>
+                                <div class="project-icon">📊</div>
                             </div>
                             <div class="project-content">
-                                <h3 class="project-title">GDP Growth Tracker</h3>
-                                <p class="project-description">Real-time GDP monitoring with sector breakdowns and international comparisons.</p>
+                                <h3 class="project-title">The Business Pulse</h3>
+                                <p class="project-description">Bi-weekly econometric analysis of Census Bureau BTOS data with comprehensive business sentiment tracking.</p>
                                 <div class="project-meta">
                                     <span class="project-category economic">Economic</span>
-                                    <span class="project-status coming-soon">Coming Soon</span>
+                                    <span class="project-status available">Available</span>
                                 </div>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Financial Projects -->
                         <div class="project-card coming-soon-card" data-category="financial" data-status="coming-soon" data-name="Portfolio Analyzer" data-date="2025-02">
