@@ -447,6 +447,76 @@
             filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.4));
         }
 
+        /* Streamlit Section Styles */
+        .streamlit-section {
+            margin-bottom: 50px;
+        }
+
+        .streamlit-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .streamlit-info {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .streamlit-info h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .streamlit-info p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .streamlit-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .streamlit-tag {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .streamlit-embed {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: white;
+        }
+
+        .streamlit-embed iframe {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .streamlit-embed:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
         /* Enhanced Projects Grid */
         .projects-section {
             margin-top: 50px;
@@ -718,6 +788,27 @@
                 align-items: flex-start;
                 gap: 15px;
             }
+
+            .streamlit-container {
+                padding: 20px;
+            }
+
+            .streamlit-info p {
+                font-size: 1rem;
+            }
+
+            .streamlit-embed iframe {
+                height: 500px;
+            }
+
+            .streamlit-tags {
+                gap: 6px;
+            }
+
+            .streamlit-tag {
+                font-size: 0.8rem;
+                padding: 5px 10px;
+            }
         }
 
         /* Enhanced Animations */
@@ -896,6 +987,32 @@
                     </a>
                 </section>
 
+                <!-- Streamlit App Embed Section -->
+                <section class="content-section streamlit-section">
+                    <h2 class="featured-title">Chat with Datty</h2>
+                    <div class="streamlit-container">
+                        <div class="streamlit-info">
+                            <h3>Interactive AI Assistant</h3>
+                            <p>Chat directly with Datty, your AI-powered data analysis assistant. Get instant insights, ask questions about your data, and explore analytics in an interactive conversation.</p>
+                            <div class="streamlit-tags">
+                                <span class="streamlit-tag">AI Assistant</span>
+                                <span class="streamlit-tag">Interactive Chat</span>
+                                <span class="streamlit-tag">Real-time Analysis</span>
+                            </div>
+                        </div>
+                        <div class="streamlit-embed">
+                            <iframe 
+                                src="https://chat-with-datty.streamlit.app/?embedded=true" 
+                                width="100%" 
+                                height="600"
+                                frameborder="0"
+                                allow="camera; microphone; geolocation"
+                                sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-popups allow-top-navigation-by-user-activation">
+                            </iframe>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Enhanced Projects Section -->
                 <section class="content-section projects-section">
                     <h2 class="section-title">
@@ -990,7 +1107,7 @@
                                     <span class="project-status available">Available</span>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
 
                     <!-- No Results -->
