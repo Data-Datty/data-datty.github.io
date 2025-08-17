@@ -826,14 +826,14 @@
                             <div class="category-link active" data-category="all">
                                 <span class="category-icon">📊</span>
                                 <span>All Projects</span>
-                                <span class="category-count">6</span>
+                                <span class="category-count">7</span>
                             </div>
                         </li>
                         <li class="category-item">
                             <div class="category-link" data-category="economic">
                                 <span class="category-icon">📈</span>
                                 <span>Economic</span>
-                                <span class="category-count">2</span>
+                                <span class="category-count">3</span>
                             </div>
                         </li>
                         <li class="category-item">
@@ -947,7 +947,7 @@
                 <section class="content-section projects-section">
                     <h2 class="section-title">
                         <span id="sectionTitle">All Projects</span>
-                        <span class="results-count" id="resultsCount">6 projects</span>
+                        <span class="results-count" id="resultsCount">7 projects</span>
                     </h2>
                     
                     <div class="projects-grid" id="projectsGrid">
@@ -973,6 +973,20 @@
                             <div class="project-content">
                                 <h3 class="project-title">The Business Pulse</h3>
                                 <p class="project-description">Bi-weekly econometric analysis of Census Bureau BTOS data with comprehensive business sentiment tracking.</p>
+                                <div class="project-meta">
+                                    <span class="project-category economic">Economic</span>
+                                    <span class="project-status available">Available</span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="cpi_dashboard.html" class="project-card" data-category="economic" data-status="available" data-name="CPI Dashboard" data-date="2025-01">
+                            <div class="project-preview economic">
+                                <div class="project-icon">💹</div>
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">CPI Dashboard</h3>
+                                <p class="project-description">Consumer Price Index analysis with inflation tracking, category breakdowns, and economic insights for July 2025.</p>
                                 <div class="project-meta">
                                     <span class="project-category economic">Economic</span>
                                     <span class="project-status available">Available</span>
@@ -1037,7 +1051,7 @@
                                     <span class="project-status available">Available</span>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- No Results -->
@@ -1184,7 +1198,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Datty Enhanced Library loaded');
+            console.log('Datty Enhanced Library loaded with CPI Dashboard');
             initializeSidebar();
             filterProjects();
         });
