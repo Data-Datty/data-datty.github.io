@@ -352,6 +352,7 @@
         <div class="tab-container">
             <div class="tab-nav">
                 <button class="tab-button active" onclick="showTab('overview')">Current vs Previous Years</button>
+                <button class="tab-button" onclick="showTab('yoy-trends')">Year-over-Year Trends</button>
                 <button class="tab-button" onclick="showTab('states')">Top States</button>
                 <button class="tab-button" onclick="showTab('insights')">Key Insights</button>
             </div>
@@ -410,6 +411,61 @@
                 <div class="alert-box">
                     <h4>💡 Key Takeaway</h4>
                     <p><strong>Stability:</strong> New unemployment claims are running at very similar levels to recent years, suggesting stable labor market conditions. <strong>Watch this:</strong> After some summer volatility (peaking at 260K), claims have settled back to typical levels around 193K.</p>
+                </div>
+            </div>
+
+            <!-- Year-over-Year Trends Tab -->
+            <div id="yoy-trends" class="tab-panel">
+                <h2 class="section-title">Year-over-Year Changes</h2>
+                
+                <div class="economic-summary">
+                    <h3>📈 What the Trends Tell Us</h3>
+                    <p>Looking at year-over-year percentage changes reveals the <span class="highlight-stat">underlying trends</span> in the labor market. Positive values mean more claims than the previous year (worse conditions), while negative values mean fewer claims (better conditions). This view shows how <span class="highlight-stat">2025 compares to 2024</span>, and how previous years compared to each other, revealing the direction and momentum of labor market changes.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="chart-container">
+                        <h3 class="chart-title">Initial Claims: Year-over-Year % Change</h3>
+                        <canvas id="yoyInitialChart" width="400" height="300"></canvas>
+                        <p style="font-size: 0.9rem; color: #6b7280; text-align: center; margin-top: 15px;">
+                            Negative values (green) = fewer claims than previous year. Positive values (red) = more claims.
+                        </p>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">Weeks Claimed: Year-over-Year % Change</h3>
+                        <canvas id="yoyWeeksChart" width="400" height="300"></canvas>
+                        <p style="font-size: 0.9rem; color: #6b7280; text-align: center; margin-top: 15px;">
+                            Shows how many people staying on unemployment is changing compared to previous year.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid-4">
+                    <div class="metric-card">
+                        <div class="metric-title">2025 vs 2024 (Current Week)</div>
+                        <div class="metric-value">+0.5%</div>
+                        <div class="metric-change neutral">Essentially unchanged</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Average 2025 YoY Change</div>
+                        <div class="metric-value">+3.0%</div>
+                        <div class="metric-change negative">Slightly more claims than 2024</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Weeks Claimed YoY (Current)</div>
+                        <div class="metric-value">+1.5%</div>
+                        <div class="metric-change negative">Slightly more people on benefits</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-title">Trend Direction</div>
+                        <div class="metric-value">Stable</div>
+                        <div class="metric-change neutral">Minor increases, overall steady</div>
+                    </div>
+                </div>
+
+                <div class="alert-box">
+                    <h4>📊 YoY Trend Analysis</h4>
+                    <p><strong>2025 Performance:</strong> Initial claims in 2025 are running about 3% higher than 2024 on average, indicating a modest softening in labor market conditions. More people are also staying on unemployment benefits (+1.5% vs 2024), suggesting it may be taking longer to find jobs. <strong>Recent pattern:</strong> The current week shows minimal change (+0.5%) compared to 2024, indicating relatively stable conditions despite the broader trend toward slightly higher claims.</p>
                 </div>
             </div>
 
@@ -581,6 +637,15 @@
                     };
                 });
             }
+        };
+
+        // Calculate Year-over-Year percentage changes
+        const calculateYoYChanges = (currentYear, previousYear) => {
+            return currentYear.map((current, index) => {
+                const previous = previousYear[index];
+                if (!previous || previous === 0) return 0;
+                return ((current - previous) / previous * 100);
+            });
         };
 
         // Chart options
@@ -780,6 +845,184 @@
             });
         }
 
+        // Create YoY Initial Claims chart
+        function createYoYInitialChart() {
+            const ctx = document.getElementById('yoyInitialChart').getContext('2d');
+            
+            // Calculate YoY changes
+            const yoy2023vs2022 = calculateYoYChanges(claimsData.claims2023, claimsData.claims2022);
+            const yoy2024vs2023 = calculateYoYChanges(claimsData.claims2024, claimsData.claims2023);
+            const yoy2025vs2024 = calculateYoYChanges(claimsData.claims2025, claimsData.claims2024);
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: claimsData.weeks,
+                    datasets: [
+                        {
+                            label: '2023 vs 2022',
+                            data: yoy2023vs2022,
+                            borderColor: '#06b6d4',
+                            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: '2024 vs 2023',
+                            data: yoy2024vs2023,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: '2025 vs 2024',
+                            data: yoy2025vs2024,
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 4,
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        x: { 
+                            title: { display: true, text: 'Week of Year' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                        },
+                        y: { 
+                            title: { display: true, text: 'Year-over-Year % Change' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                        }
+                    },
+                    plugins: {
+                        ...chartOptions.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(1)}%`;
+                                }
+                            }
+                        }
+                    }
+                },
+                plugins: [{
+                    id: 'zeroLine',
+                    beforeDraw: function(chart) {
+                        const ctx = chart.ctx;
+                        const chartArea = chart.chartArea;
+                        const yScale = chart.scales.y;
+                        
+                        const zeroY = yScale.getPixelForValue(0);
+                        
+                        ctx.save();
+                        ctx.setLineDash([3, 3]);
+                        ctx.strokeStyle = '#64748b';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(chartArea.left, zeroY);
+                        ctx.lineTo(chartArea.right, zeroY);
+                        ctx.stroke();
+                        ctx.restore();
+                    }
+                }],
+                plugins: [{
+                    id: 'zeroLine',
+                    beforeDraw: function(chart) {
+                        const ctx = chart.ctx;
+                        const chartArea = chart.chartArea;
+                        const yScale = chart.scales.y;
+                        
+                        const zeroY = yScale.getPixelForValue(0);
+                        
+                        ctx.save();
+                        ctx.setLineDash([3, 3]);
+                        ctx.strokeStyle = '#64748b';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(chartArea.left, zeroY);
+                        ctx.lineTo(chartArea.right, zeroY);
+                        ctx.stroke();
+                        ctx.restore();
+                    }
+                }]
+            });
+        }
+
+        // Create YoY Weeks Claimed chart
+        function createYoYWeeksChart() {
+            const ctx = document.getElementById('yoyWeeksChart').getContext('2d');
+            
+            // Calculate YoY changes for weeks claimed
+            const yoy2023vs2022 = calculateYoYChanges(claimsData.weeksClaimed2023, claimsData.weeksClaimed2022);
+            const yoy2024vs2023 = calculateYoYChanges(claimsData.weeksClaimed2024, claimsData.weeksClaimed2023);
+            const yoy2025vs2024 = calculateYoYChanges(claimsData.weeksClaimed2025, claimsData.weeksClaimed2024);
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: claimsData.weeks,
+                    datasets: [
+                        {
+                            label: '2023 vs 2022',
+                            data: yoy2023vs2022,
+                            borderColor: '#06b6d4',
+                            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: '2024 vs 2023',
+                            data: yoy2024vs2023,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4
+                        },
+                        {
+                            label: '2025 vs 2024',
+                            data: yoy2025vs2024,
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 4,
+                            fill: false,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        x: { 
+                            title: { display: true, text: 'Week of Year' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                        },
+                        y: { 
+                            title: { display: true, text: 'Year-over-Year % Change' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                        }
+                    },
+                    plugins: {
+                        ...chartOptions.plugins,
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.parsed.y.toFixed(1)}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
         // Create recent trend chart
         function createRecentTrendChart() {
             const ctx = document.getElementById('recentTrendChart').getContext('2d');
@@ -829,6 +1072,8 @@
             setTimeout(() => {
                 createYearComparisonChart();
                 createWeeksClaimedChart();
+                createYoYInitialChart();
+                createYoYWeeksChart();
                 createStatesChart();
                 createRecentTrendChart();
             }, 100);
